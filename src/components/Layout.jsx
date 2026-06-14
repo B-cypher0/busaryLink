@@ -1,7 +1,7 @@
 // src/components/Layout.jsx
 import { Outlet, NavLink, useNavigate } from 'react-router-dom'
 import { signOut } from '../lib/supabase'
-import styled from './Layout.module.css'
+
 
 const NAV = [
   { to: '/',        icon: '⬡', label: 'Dashboard'   },
