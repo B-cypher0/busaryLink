@@ -8,8 +8,18 @@ import Apply from './pages/Apply'
 import Career from './pages/Career'
 import News from './pages/News'
 import Review from './pages/Review'
-import Layout from './components/Layout'
+import Accounts from './pages/Accounts'
+import Layout, { RequireAdmin } from './components/Layout'
 import './index.css'
+
+function AdminRoute({ session, children }) {
+  return (
+    <>
+      <RequireAdmin session={session} />
+      {children}
+    </>
+  )
+}
 
 export default function App() {
   const [session, setSession] = useState(undefined)
@@ -41,7 +51,12 @@ export default function App() {
             <Route path="/apply" element={<Apply session={session} />} />
             <Route path="/career" element={<Career />} />
             <Route path="/news" element={<News />} />
-            <Route path="/review" element={<Review />} />
+            <Route path="/review" element={
+              <AdminRoute session={session}><Review /></AdminRoute>
+            } />
+            <Route path="/accounts" element={
+              <AdminRoute session={session}><Accounts /></AdminRoute>
+            } />
             <Route path="*" element={<Navigate to="/" />} />
           </Route>
         )}
